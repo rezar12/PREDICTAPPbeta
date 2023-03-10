@@ -15,7 +15,6 @@ clone le repository
 
 ```
 git clone https://github.com/rezar12/PREDICTAPPbeta.git
-cd PREDICTAPPbeta
 ```
 en suite rdv dans le repo
 ```

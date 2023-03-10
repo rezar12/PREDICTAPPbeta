@@ -33,13 +33,22 @@ pip install -r requirements.txt
 ```
 
 **etape 4 :**
-deplacer le fichier du model sauvegardé dans le repertoire de l'APP.
+
+**deplacer le fichier du model sauvegardé dans le repertoire de l'APP.**
+
 
 **etape 5 :**
 creation du dossier *''images''*
 ```
 mkdir images
 ```
+##### structure de dossier :
+|---PREDICTAPPbeta|
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|---images
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|---App.py
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|---README.md
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|---requirements.txt
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|---model.h5
 
 **etape 6 :**
 lancé streamlit pour utilisé l'app :

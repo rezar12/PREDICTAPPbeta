@@ -43,13 +43,15 @@ creation du dossier *''images''*
 mkdir images
 ```
 ##### structure de dossier :
-|---PREDICTAPPbeta|
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|---images
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|---App.py
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|---README.md
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|---requirements.txt
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|---model.h5
 
+```
+|---PREDICTAPPbeta|
+                  |---images
+                  |---App.py
+                  |---README.md
+                  |---requirements.txt
+                  |---model.h5
+```
 **etape 6 :**
 lancé streamlit pour utilisé l'app :
 ```

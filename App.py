@@ -84,6 +84,14 @@ if st.button("Predict"):
     #listimage = []
     #col,col2,__,___,___,= st.columns(5)
     #with col2:
+    collabel,col2label,col3label= st.columns(3)
+    with collabel:
+        st.write("##### Image")
+    with col2label:
+        st.write("##### Predict")
+    with col3label:
+        st.write("##### Plot the class probability")
+    st.markdown('''<hr style="border-top: 3px solid #333333;">''',unsafe_allow_html=True)
     for i in range(len(os.listdir("images"))):
         col,col2,col3= st.columns(3)
         prediction = Predict(data[i])
@@ -98,6 +106,7 @@ if st.button("Predict"):
             axes = ["AFS","AFC","AF","AFSC","FSC","FS","FC","NC"]
             ax.bar(axes,vector(prediction[1]).tolist()[0])
             st.pyplot(fig)
+        st.markdown('''<hr style="border-top: 3px solid #333333;">''',unsafe_allow_html=True)
 
     #df = pd.DataFrame(list(zip(listimage, listpredict)),columns=["images","result"])
     #html = convert_df(df)

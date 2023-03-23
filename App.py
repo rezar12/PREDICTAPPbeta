@@ -4,7 +4,8 @@ import cv2
 from tensorflow import keras
 import numpy as np
 from PIL import Image
-
+import pandas as pd
+import matplotlib.pyplot as plt
 model = keras.models.load_model('VGG19_softmax.h5')
 ###################| Function |#########################################################
 
@@ -43,21 +44,21 @@ def Predict(image):
     predict_image = model.predict(image)
     classe_predite = np.argmax(predict_image)
     if classe_predite == 0:
-        st.write('#### AFS')
+        return ("AFS",predict_image)
     elif classe_predite == 1:
-        st.write('#### AFC')
+        return ("AFC",predict_image)
     elif classe_predite == 2:
-        st.write('#### AF')
+        return ("AF",predict_image)
     elif classe_predite == 3:
-        st.write('#### AFSC')
+        return ("AFSC",predict_image)
     elif classe_predite == 4:
-        st.write('#### FSC')
+        return ("FSC",predict_image)
     elif classe_predite == 5:
-        st.write('#### FS')
+        return ("FS",predict_image)
     elif classe_predite == 6:
-        st.write('#### FC')
+        return ("FC",predict_image)
     else:
-        st.write('#### NC')
+        return "NC"
 
 st.markdown('''<h2 style="color:#333333;">PREDICTEUR</h2> ''',unsafe_allow_html=True)
 st.info(''' ❓  Le principe de la version bêta du prédicteur exige de uploader un seul fichier image, puis d'appuyer sur le bouton de prédiction. Après la prédiction, appuyez sur remove pour suprimer l'image et ensuite re-uploader une image pour tester à nouveau. Répétez cette même procédure pour chaque image à tester.''',)
@@ -68,17 +69,58 @@ if uploaded_files != []:
     for uploaded_file in uploaded_files:
         save_uploadfile(uploaded_file)
     st.success("file upload")
+def path_to_image_html(image):
+    return '<img src="./images/'+image+'"width="60" >'
 
+def convert_df(input_df):
+     # IMPORTANT: Cache the conversion to prevent computation on every rerun
+     return input_df.to_html(escape=False, formatters=dict(images=path_to_image_html))
 
+vector = np.vectorize(np.float_)
 if st.button("Predict"):
     st.write("")
     data = formatData("images")
-    col,col2,__,___,___,= st.columns(5)
-    with col2:
-        image = Image.open(os.path.join("images",LoadImage("images")[0]))
-        st.image(image, caption='Image a predire')
-    with col:    
-        result=Predict(data[0])
+    #listpredict = []
+    #listimage = []
+    #col,col2,__,___,___,= st.columns(5)
+    #with col2:
+    for i in range(len(os.listdir("images"))):
+        col,col2,col3= st.columns(3)
+        prediction = Predict(data[i])
+        with col:
+            image =st.image("images/124104.jpg")
+        with col2:
+            st.write(prediction[0])
+        #listimage.append(str(image))
+        #listpredict.append(prediction)
+        with col3:
+            fig, ax = plt.subplots()
+            axes = ["AFS","AFC","AF","AFSC","FSC","FS","FC","NC"]
+            ax.bar(axes,vector(prediction[1]).tolist()[0])
+            st.pyplot(fig)
+
+    #df = pd.DataFrame(list(zip(listimage, listpredict)),columns=["images","result"])
+    #html = convert_df(df)
+    #st.markdown(
+    #html,unsafe_allow_html=True)
+    
+
+
+    # Converting links to html tags
+
+
+
+
+
+
+    #     st.image(image, caption='Image a predire')
+    #     st.write("-------------------------")
+    # #with col:
+    # for i in range(len(data)):
+    #     prediction = Predict(data[i])
+    #     st.write(str(prediction).replace('None',""))  
+    #     st.write("-------------------------") 
+    
    
 st.write("")
 if st.button("remove"):

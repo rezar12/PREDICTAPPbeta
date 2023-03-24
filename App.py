@@ -77,6 +77,7 @@ def convert_df(input_df):
      return input_df.to_html(escape=False, formatters=dict(images=path_to_image_html))
 
 vector = np.vectorize(np.float_)
+listimage=os.listdir("images")
 if st.button("Predict"):
     st.write("")
     data = formatData("images")
@@ -96,7 +97,7 @@ if st.button("Predict"):
         col,col2,col3= st.columns(3)
         prediction = Predict(data[i])
         with col:
-            image =st.image("images/124104.jpg")
+            image =st.image("images/"+str(listimage[i]))
         with col2:
             st.write(prediction[0])
         #listimage.append(str(image))
